@@ -8,13 +8,22 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function index(){
-        $post = Post::find(1);
-        dump($post->title);
-        dump($post->likes);
+        $posts = Post::where('is_published', 1)->get();
+        foreach ($posts as $post) {
+            dump($post->title);
+        }
+        dd('end');
     }
+    /*
+     * Чтение всех данных: all();
+     * Чтение данных с условием: where('условие', значение)->get();
+     * Чтение данных с условием только первой записи: where('условие', значение)->first();
+     * Возвращается коллекция, поэтому вывод через foreach.
+     */
+     
 
 /*    Почему обращаемся к модели, а не к бд?
-    Модель уже имеет привязку к таблице и посредством этого 
+    Модель уже имеет привязку к таблице и посредством этого
     мы уже можем использовать зарезервированные методы,
     которые сокрыли в себе sql запросы
 */
