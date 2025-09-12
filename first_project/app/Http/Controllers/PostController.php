@@ -37,11 +37,32 @@ class PostController extends Controller
                 'likes' => 20,
                 'is_published' => 1,
 
-            ],[
+            ], [
                 'title' => 'another title of post from phpstorm',
                 'content' => 'another content of post from phpstorm',
                 'image' => 'jdjd.jpg',
                 'likes' => 100,
+                'is_published' => 1,
+
+            ], [
+                'title' => 'title of post',
+                'content' => 'content of post',
+                'image' => 'img.jpg',
+                'likes' => 10,
+                'is_published' => 1,
+
+            ], [
+                'title' => 'second title',
+                'content' => 'content',
+                'image' => 'pdppsps.jpg',
+                'likes' => 30,
+                'is_published' => 1,
+
+            ], [
+                'title' => 'title blabla',
+                'content' => 'content of post',
+                'image' => 'gwwyw.jpg',
+                'likes' => 50,
                 'is_published' => 1,
 
             ]
@@ -69,6 +90,13 @@ class PostController extends Controller
             'is_published' => 1,
         ]);
         dd('updated');
+    }
+
+    public function delete()
+    {
+        $post = Post::find(3);
+        $post->delete();
+        dd('deleted');
     }
 
 
