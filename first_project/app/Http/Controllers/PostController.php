@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    /*    Почему обращаемся к модели, а не к бд?
+        Модель уже имеет привязку к таблице и посредством этого
+        мы уже можем использовать зарезервированные методы,
+        которые сокрыли в себе sql запросы
+    */
     public function index()
     {
         $posts = Post::where('is_published', 1)->get();
@@ -53,9 +58,18 @@ class PostController extends Controller
         dd('created');
     }
 
-    /*    Почему обращаемся к модели, а не к бд?
-        Модель уже имеет привязку к таблице и посредством этого
-        мы уже можем использовать зарезервированные методы,
-        которые сокрыли в себе sql запросы
-    */
+    public function update()
+    {
+        $post = Post::find(5);
+        $post->update([
+            'title' => 'updated title',
+            'content' => 'updated content',
+            'image' => 'updated_image.jpg',
+            'likes' => 2,
+            'is_published' => 1,
+        ]);
+        dd('updated');
+    }
+
+
 }
