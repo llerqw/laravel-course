@@ -9,4 +9,6 @@ class Post extends Model // Все св-ва и методы наследуют�
 {
     use HasFactory;
 //    Урок 5. Модели.
+    public $someProperty; // кастомное св-во
+    protected $table = 'posts'; // явно указываем связь модели и миграции(таблицы)
 }

@@ -17,7 +17,7 @@ Route::get('/', function () {
     return 'aaaaaaaaaaaaaaaa';
 });
 
-Route::get('/my_page', 'MyPlaceController@index');
+Route::get('/posts', 'PostController@index');
 
 
 //8 роутов
