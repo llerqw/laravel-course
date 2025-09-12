@@ -100,4 +100,37 @@ class PostController extends Controller
     }
 
 
+    public function firstOrCreate()
+    {
+        $post = Post::firstOrCreate(
+            [
+                'title' => 'some post title',
+            ],
+            [
+                'title' => 'some post title',
+                'content' => 'some post content',
+                'image' => 'some_img.jpg',
+                'likes' => 20,
+                'is_published' => 1,
+            ]);
+        dump($post->content);
+        dd('firstOrCreated');
+    }
+
+    public function updateOrCreate()
+    {
+        $post = Post::updateOrCreate(
+            [
+                'title' => 'some post title',
+            ],
+            [
+                'title' => 'some post title',
+                'content' => 'updateOrCreate post content',
+                'image' => 'some_img.jpg',
+                'likes' => 20,
+                'is_published' => 1,
+            ]);
+        dump($post->content);
+        dd('updateOrCreated');
+    }
 }
