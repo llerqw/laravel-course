@@ -1,15 +1,29 @@
-<!doctype html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Posts</title>
-</head>
-<body>
-<div>
-    @foreach($posts as $post)
-        <div>{{$post->title}}</div>
-    @endforeach
-</div>
-</body>
-</html>
+@extends('layouts.main')
+@section('content')
+    <div>
+        this is posts page
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Content</th>
+            <th scope="col">Likes</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach($posts as $post)
+        <tr>
+            <th scope="row">1</th>
+            <td>{{$post->title}}</td>
+            <td>{{$post->content}}</td>
+            <td>{{$post->likes}}</td>
+        </tr>
+        @endforeach
+        </tbody>
+    </table>
+
+@endsection
+
+
