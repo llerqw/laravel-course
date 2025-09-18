@@ -3,6 +3,9 @@
     <div>
         this is posts page
     </div>
+    <div>
+        <a href="{{route('post.create')}}" class="btn btn-outline-primary mt-2 mb-2">Add one</a>
+    </div>
     <table class="table">
         <thead>
         <tr>
@@ -14,12 +17,12 @@
         </thead>
         <tbody>
         @foreach($posts as $post)
-        <tr>
-            <th scope="row">1</th>
-            <td>{{$post->title}}</td>
-            <td>{{$post->content}}</td>
-            <td>{{$post->likes}}</td>
-        </tr>
+            <tr>
+                <th scope="row">{{$post->id}}</th>
+                <td><a href="{{route('post.show', $post->id)}}"> {{$post->title}}</a></td>
+                <td>{{$post->content}}</td>
+                <td>{{$post->likes}}</td>
+            </tr>
         @endforeach
         </tbody>
     </table>

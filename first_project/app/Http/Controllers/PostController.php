@@ -16,7 +16,7 @@ class PostController extends Controller
     {
         $posts = Post::all();
 
-        return view('posts', compact('posts')); //передаем посты во вьюшку
+        return view('post.index', compact('posts')); //передаем посты во вьюшку
     }
 
     /*
@@ -27,68 +27,47 @@ class PostController extends Controller
      */
     public function create()
     {
-        $postsArr = [
-            [
-                'title' => 'title of post from phpstorm',
-                'content' => 'content of post from phpstorm',
-                'image' => 'imagedjjdjd.jpg',
-                'likes' => 20,
-                'is_published' => 1,
-
-            ], [
-                'title' => 'another title of post from phpstorm',
-                'content' => 'another content of post from phpstorm',
-                'image' => 'jdjd.jpg',
-                'likes' => 100,
-                'is_published' => 1,
-
-            ], [
-                'title' => 'title of post',
-                'content' => 'content of post',
-                'image' => 'img.jpg',
-                'likes' => 10,
-                'is_published' => 1,
-
-            ], [
-                'title' => 'second title',
-                'content' => 'content',
-                'image' => 'pdppsps.jpg',
-                'likes' => 30,
-                'is_published' => 1,
-
-            ], [
-                'title' => 'title blabla',
-                'content' => 'content of post',
-                'image' => 'gwwyw.jpg',
-                'likes' => 50,
-                'is_published' => 1,
-
-            ]
-        ];
-
-        foreach ($postsArr as $item) {
-            Post::create($item);
-            /*
-             * Функция принимает массив,
-             * важно чтобы названия колонок совпадали с названиями атрибутов
-             */
-        }
-
-        dd('created');
+        return view('post.create');
     }
 
-    public function update()
+    public function store(Request $request)
     {
-        $post = Post::find(5);
-        $post->update([
-            'title' => 'updated title',
-            'content' => 'updated content',
-            'image' => 'updated_image.jpg',
-            'likes' => 2,
-            'is_published' => 1,
+        $data = $request->validate([
+            'title' => 'required|string',
+            'content' => 'required|string',
+            'image' => 'required',
         ]);
-        dd('updated');
+        Post::create($data);
+        return redirect()->route('post.index');
     }
+
+    public function show(Post $post)
+    {
+        return view('post.show', compact('post'));
+    }
+
+    public function edit(Post $post)
+    {
+        return view('post.edit', compact('post'));
+    }
+
+    public function update(Post $post, Request $request)
+    {
+        $data = $request->validate([
+            'title' => 'required|string',
+            'content' => 'required|string',
+            'image' => 'required',
+        ]);
+        $post->update($data);
+        return redirect()->route('post.show', $post->id);
+    }
+
+    public function destroy(Post $post)
+    {
+        $post->delete();
+        return redirect()->route('post.index');
+    }
+
 
     public function delete()
     {
