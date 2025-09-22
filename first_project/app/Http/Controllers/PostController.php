@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
@@ -15,13 +16,8 @@ class PostController extends Controller
     */
     public function index()
     {
-//        $posts = Post::all();
-//
-//        return view('post.index', compact('posts')); //передаем посты во вьюшку
-
-        $posts = Post::find(1);
-        $tag = Tag::find(3);
-        dd($tag->posts);
+        $posts = Post::all();
+        return view('post.index', compact('posts')); //передаем посты во вьюшку
     }
 
     /*
@@ -32,7 +28,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('post.create');
+
+        $categories = Category::all();
+        return view('post.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -41,6 +39,7 @@ class PostController extends Controller
             'title' => 'required|string',
             'content' => 'required|string',
             'image' => 'required',
+            'category_id' => 'required',
         ]);
         Post::create($data);
         return redirect()->route('post.index');
@@ -53,7 +52,8 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
-        return view('post.edit', compact('post'));
+        $categories = Category::all();
+        return view('post.edit', compact('post', 'categories'));
     }
 
     public function update(Post $post, Request $request)
@@ -62,6 +62,7 @@ class PostController extends Controller
             'title' => 'required|string',
             'content' => 'required|string',
             'image' => 'required',
+            'category_id' => 'required',
         ]);
         $post->update($data);
         return redirect()->route('post.show', $post->id);
