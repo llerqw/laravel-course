@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -19,7 +20,8 @@ class PostController extends Controller
 //        return view('post.index', compact('posts')); //передаем посты во вьюшку
 
         $posts = Post::find(1);
-        dd($posts->category);
+        $tag = Tag::find(3);
+        dd($tag->posts);
     }
 
     /*
