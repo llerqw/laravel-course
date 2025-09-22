@@ -48,7 +48,7 @@ class PostController extends Controller
         unset($data['tags']);
 
         $post = Post::create($data);
-        $post->tags()->attach($tags);
+        $post->tags()->attach($tags); // продолжаем sql-запрос и создаем связи с тегами
 
         return redirect()->route('post.index');
     }
@@ -61,7 +61,8 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::all();
-        return view('post.edit', compact('post', 'categories'));
+        $tags = Tag::all();
+        return view('post.edit', compact('post', 'categories', 'tags'));
     }
 
     public function update(Post $post, Request $request)
@@ -71,7 +72,11 @@ class PostController extends Controller
             'content' => 'required|string',
             'image' => 'required',
             'category_id' => 'required',
+            'tags' => 'required',
         ]);
+        $tags = $data['tags'];
+        unset($data['tags']);
+        $post->tags()->sync($tags); // удаляет старые связи и создает новые
         $post->update($data);
         return redirect()->route('post.show', $post->id);
     }
