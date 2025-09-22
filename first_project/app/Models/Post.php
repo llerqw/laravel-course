@@ -15,4 +15,9 @@ class Post extends Model // Все св-ва и методы наследуют�
     protected $table = 'posts'; // явно указываем связь модели и миграции(таблицы)
     protected $guarded = []; // сознательное разрешение на добавление атрибутов в бд, те защищать никакой атрибут не нужно
     // protected $fillable = []; тож самое, но нужно будет все атрибуты обозначить
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
 }

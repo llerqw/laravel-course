@@ -14,9 +14,12 @@ class PostController extends Controller
     */
     public function index()
     {
-        $posts = Post::all();
+//        $posts = Post::all();
+//
+//        return view('post.index', compact('posts')); //передаем посты во вьюшку
 
-        return view('post.index', compact('posts')); //передаем посты во вьюшку
+        $posts = Post::find(1);
+        dd($posts->category);
     }
 
     /*
