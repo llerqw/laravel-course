@@ -9,16 +9,13 @@ use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
-class StoreController extends Controller
+class StoreController extends BaseController
 {
     public function __invoke(StoreRequest $request) // из ООП. как только из роута обратимся к этому классу выполнится этот метод. Дословно переводится как призывать
     {
         $data = $request->validated();
-        $tags = $data['tags'];
-        unset($data['tags']);
 
-        $post = Post::create($data);
-        $post->tags()->attach($tags); // продолжаем sql-запрос и создаем связи с тегами
+        $this->service->store($data);
 
         return redirect()->route('post.index');
     }

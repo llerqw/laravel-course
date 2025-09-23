@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Post;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 
-class IndexController extends Controller
+class IndexController extends BaseController
 {
     /*    Почему обращаемся к модели, а не к бд?
         Модель уже имеет привязку к таблице и посредством этого
