@@ -14,7 +14,7 @@ class IndexController extends BaseController
     */
     public function __invoke() // из ООП. как только из роута обратимся к этому классу выполнится этот метод. Дословно переводится как призывать
     {
-        $posts = Post::all();
+        $posts = Post::paginate(10);
         return view('post.index', compact('posts')); //передаем посты во вьюшку
     }
 
