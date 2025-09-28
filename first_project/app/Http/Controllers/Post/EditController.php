@@ -9,7 +9,6 @@ use App\Models\Tag;
 
 class EditController extends BaseController
 {
-
     public function __invoke(Post $post) // из ООП. как только из роута обратимся к этому классу выполнится этот метод. Дословно переводится как призывать
     {
         $categories = Category::all();
