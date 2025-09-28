@@ -14,7 +14,6 @@ class StoreController extends BaseController
     public function __invoke(StoreRequest $request) // из ООП. как только из роута обратимся к этому классу выполнится этот метод. Дословно переводится как призывать
     {
         $data = $request->validated();
-
         $this->service->store($data);
 
         return redirect()->route('post.index');
